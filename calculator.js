@@ -37,6 +37,7 @@ buttons.forEach((button) => {
     let num2;
     let operator;
     button.addEventListener('click', (event) => {
+        if (event.target.textContent != "<="){
         screen.textContent += event.target.textContent;
         let input = screen.textContent.trim();
         let split = input.match(/^(\d+)([+\-*x/])(\d+)([+\-*x=/])?/);
@@ -51,5 +52,9 @@ buttons.forEach((button) => {
                 }
             }
         }
+    }
+    if (event.target.textContent === "<="){
+        screen.textContent = screen.textContent.slice(0, -1);
+    }
     })
 })
