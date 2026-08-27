@@ -11,7 +11,8 @@ let multiply = function(num1, num2){
 }
 
 let divide = function(num1, num2){
-    return num1 / num2;
+    let dividedNum = num1 / num2;
+    return dividedNum.toFixed(2);
 }
 
 let operate = function(num1, operator, num2) {
@@ -36,11 +37,25 @@ buttons.forEach((button) => {
     let num1;
     let num2;
     let operator;
+    let operatorSymbols = ["+","-","x","/","="]
     button.addEventListener('click', (event) => {
         if (event.target.textContent != "<="){
+            if (screen.textContent === "" && operatorSymbols.includes(event.target.textContent)){
+                return;
+            }
+        let currentInput = screen.textContent.trim();
+        let lastChar = currentInput.slice(-1);
+        
+        if (operatorSymbols.includes(lastChar) && operatorSymbols.includes(event.target.textContent)){
+                screen.textContent = currentInput.slice(0, -1) + event.target.textContent;
+        } 
+        else {
+                screen.textContent += event.target.textContent;
+            }
+
         screen.textContent += event.target.textContent;
         let input = screen.textContent.trim();
-        let split = input.match(/^(\d+)([+\-*x/])(\d+)([+\-*x=/])?/);
+        let split = input.match(/^(\d+(?:\.\d+)?)([+\-*x/])(\d+(?:\.\d+)?)([+\-*x=/])?/);
         if(split){
             num1 = Number(split[1]);
             operator = split[2];
@@ -52,9 +67,10 @@ buttons.forEach((button) => {
                 }
             }
         }
+    
     }
     if (event.target.textContent === "<="){
-        screen.textContent = screen.textContent.slice(0, -1);
+        screen.textContent = "";
     }
     })
 })
