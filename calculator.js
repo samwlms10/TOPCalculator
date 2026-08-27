@@ -52,8 +52,6 @@ buttons.forEach((button) => {
         else {
                 screen.textContent += event.target.textContent;
             }
-
-        screen.textContent += event.target.textContent;
         let input = screen.textContent.trim();
         let split = input.match(/^(\d+(?:\.\d+)?)([+\-*x/])(\d+(?:\.\d+)?)([+\-*x=/])?/);
         if(split){
